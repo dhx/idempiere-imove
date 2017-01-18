@@ -1,0 +1,26 @@
+ * This program is free software; you can redistribute it and/or modify it    *
+ * under the terms version 2 of the GNU General Public License as published   *
+ * by the Free Software Foundation. This program is distributed in the hope   *
+ * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
+ * See the GNU General Public License for more details.                       *
+ * You should have received a copy of the GNU General Public License along    *
+ * with this program; if not, write to the Free Software Foundation, Inc.,    *
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
+
+This extension contains currently:
+
+- two new fields for the Inventory Movement Table (M_Movement) to allow setting
+  the source and destination warehouse for the movement. When these are set
+  there is a new callout in this extension that sets the source and destination
+  locator automatically by searching for in the specified warehouses.
+  
+For this Extension to work properly you'll have to change the callouts in the
+M_MovementLine Table like this:
+
+- remove the callout on the M_Product_ID Field (as we already provide a new
+  callout for this one)
+- add a callout to the M_Locator Field
+  (org.compiere.model.CalloutMovement.locator)
+  
+ 

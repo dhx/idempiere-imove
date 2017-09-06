@@ -27,6 +27,9 @@ public class CalloutFactory implements IColumnCalloutFactory {
 		if (tableName.equals(MMovementLine.Table_Name) && columnName.equals(MMovementLine.COLUMNNAME_M_Product_ID))
 			list.add(new CalloutFromFactory());
 
+		if (tableName.equals(MMovementLine.Table_Name) && columnName.equals(MMovementLine.COLUMNNAME_Description))
+			list.add(new CalloutMovementLineDescription());
+		
 		return list != null ? list.toArray(new IColumnCallout[0]) : new IColumnCallout[0];
 	}
 

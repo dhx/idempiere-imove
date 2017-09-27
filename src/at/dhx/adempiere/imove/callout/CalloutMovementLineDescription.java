@@ -12,7 +12,6 @@ import org.compiere.model.GridField;
 import org.compiere.model.GridTab;
 import org.compiere.model.MLocator;
 import org.compiere.model.MProduct;
-import org.compiere.model.MStorageOnHand;
 import org.compiere.model.Query;
 import org.compiere.util.Env;
 
@@ -29,6 +28,20 @@ public class CalloutMovementLineDescription implements IColumnCallout {
 	public String start(Properties ctx, int WindowNo, GridTab mTab,
 			GridField mField, Object value, Object oldValue) {
 
+		Object processed = mTab.getValue("Processed");
+		if (processed instanceof Boolean) {
+			if ((Boolean)processed) {
+				return null;
+			}
+		} else if (processed instanceof String) {
+			if (!((String)processed).equals("N")) {
+				return null;
+			}
+		} else {
+			// unknown type of field processed, throw error
+			return "Unknown type of field 'processed'";
+		}
+		
 		Integer warehouse_src_id = (Integer)mTab.getParentTab().getValue("M_WarehouseSource_ID");
 		Integer warehouse_dest_id = (Integer)mTab.getParentTab().getValue("M_Warehouse_ID");
 		
